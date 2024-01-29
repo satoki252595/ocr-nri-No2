@@ -28,12 +28,17 @@ PATH_TEXT = PWD + '/static/text/'
 
 ##各種関数
 
-def imageToText(input_image_path,output_filename):
+def imageToText_Azuru(input_image_path,output_filename):
     # テキストの出力
     with open(PATH_TEXT + output_filename, "w", encoding="utf-8") as f:
         for text_result in ocr.azuru_ocr(input_image_path).analyze_result.read_results:
             for line in text_result.lines:
                 f.write(line.text + "\n")
+                
+def imageToText_pythonOCR(input_image_path,output_filename):
+    # テキストの出力
+    with open(PATH_TEXT + output_filename, "w", encoding="utf-8") as f:
+        f.write(ocr.python_ocr(input_image_path))
 
 def diff_file_text(file_mae,file_ato):
     
@@ -62,6 +67,6 @@ def diff_file_text(file_mae,file_ato):
     
 if __name__ == '__main__':
     
-    imageToText(PATH_IMAGE+'mae/' + mae_image_file_name,'mae/mae.txt')
-    imageToText(PATH_IMAGE+'ato/' + ato_image_file_name,'ato/ato.txt')
+    imageToText_pythonOCR(PATH_IMAGE+'mae/' + mae_image_file_name,'mae/mae.txt')
+    imageToText_pythonOCR(PATH_IMAGE+'ato/' + ato_image_file_name,'ato/ato.txt')
     diff_file_text('mae.txt','ato.txt')
