@@ -11,7 +11,7 @@ key = config['setting']['ACCOUNT_KEY']
 endpoint = config['setting']['END_POINT']
 # image_path = "static/image/41372.png"  # ローカルの画像パス
 
-def ocr(image_path):
+def azuru_ocr(image_path):
     computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(key))
     local_image = open(image_path, "rb")
     try:
@@ -44,6 +44,6 @@ def ocr(image_path):
 
 
 if __name__ == "__main__":
-    result = ocr(image_path)
+    result = azuru_ocr(image_path)
     for line in result.analyze_result.read_results[0].lines:
         print(line.text)

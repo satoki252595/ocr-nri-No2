@@ -31,7 +31,7 @@ PATH_TEXT = PWD + '/static/text/'
 def imageToText(input_image_path,output_filename):
     # テキストの出力
     with open(PATH_TEXT + output_filename, "w", encoding="utf-8") as f:
-        for text_result in ocr.ocr(input_image_path).analyze_result.read_results:
+        for text_result in ocr.azuru_ocr(input_image_path).analyze_result.read_results:
             for line in text_result.lines:
                 f.write(line.text + "\n")
 
