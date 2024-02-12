@@ -3,7 +3,6 @@
 # 引数1：比較前のpng、引数2：比較後のpng
 # アウトプットはtext配下のフォルダに差分HTMLを出力する。
 
-
 ##ライブラリimport
 
 import diff_match_patch
