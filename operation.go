@@ -1,5 +1,12 @@
 package main
 
+//pythonで実行ファイルを生成、
+//Goで実行ファイルを生成して、pythonの実行ファイルをGoの実行ファイルに渡す方が綺麗かな。
+
+// #cgo pkg-config: python3
+// #include <Python.h>
+import "C"
+
 import (
 	"bufio"
 	"fmt"
@@ -32,11 +39,15 @@ func isSetting() bool {
 
 func main() {
 	fmt.Println("現新比較ツールの設定を始めます。")
-
 	for {
 		if isSetting() {
 			break
 		}
 		fmt.Println()
 	}
+
+	fmt.Println("現新比較ツールを実行します。")
+
+	defer C.Py_Finalize()
+	C.Py_Initialize()
 }
