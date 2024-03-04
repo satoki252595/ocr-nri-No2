@@ -117,6 +117,8 @@ class imagetable(object):
             for jdx,(m,a) in enumerate(zip(mae,ato)):
                 diff = m == a
                 info,result = check_true(diff)
+                
+                print(idx,info,result)
         
                 ##ここで差分がある場合はImageに赤線などをつける処理を入れる。
                 if result == False:
