@@ -15,6 +15,9 @@ def diff_image_Azure(image_folder_pass,png_img_name):
 
     mae_cleansing_tables = img_obj.cleansing(mae_extracted_tables)
     ato_cleansing_tables = img_obj.cleansing(ato_extracted_tables)
+    
+    print('★★★★★★')
+    print(len(mae_extracted_tables))
 
     mae_frame_img = img_obj.visualFrameTable(mae_extracted_tables,MA_Flag = 'mae')
     ato_frame_img = img_obj.visualFrameTable(ato_extracted_tables,MA_Flag = 'ato')
@@ -26,6 +29,7 @@ def diff_image_Azure(image_folder_pass,png_img_name):
         mae_cleansing_tables,ato_cleansing_tables,
         mae_img,ato_img,mae_extracted_tables,ato_extracted_tables  
     )
+    
     
     return mae_diff_img,ato_diff_img
 

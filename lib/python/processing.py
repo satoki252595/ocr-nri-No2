@@ -96,40 +96,41 @@ class imagetable(object):
         
         t_extracted_tables_cleansing = []
         
-        for t_mae_ExtractedTable in extracted_tables:
-            if t_mae_ExtractedTable.title != None:
-                title = t_mae_ExtractedTable.title.replace('\n','')
+        for extracted in extracted_tables:
+            if extracted.title != None:
+                title = extracted.title.replace('\n','')
                 title = title.replace(' ','')
                 title = title.replace('　','')
             else:
                 title = ''
-            df = t_mae_ExtractedTable.df.fillna('')
+            df = extracted.df.fillna('')
             df = df.replace('\n','',regex=True)
             df = df.replace(' ','',regex=True)
             df = df.replace('　','',regex=True)
             t_extracted_tables_cleansing.append([title,df])
             
-            return t_extracted_tables_cleansing
+        return t_extracted_tables_cleansing
         
     def diff_draw(self,t_mae_cleansing,t_ato_cleansing,mae_img,ato_img,t_mae,t_ato):
 
         for idx,(mae,ato) in enumerate(zip(t_mae_cleansing,t_ato_cleansing)):
             for jdx,(m,a) in enumerate(zip(mae,ato)):
+                
                 diff = m == a
                 info,result = check_true(diff)
-                
-                print(idx,info,result)
-        
+            
+                #print('({},{})　{}：{}'.format(idx,jdx,info,result))
+
                 ##ここで差分がある場合はImageに赤線などをつける処理を入れる。
                 if result == False:
-        
+
                     ##タイトルに差分がある箇所を描画
                     if info == 'title':
-                        cv2.line(mae_img,(int(t_mae[idx].bbox.x1), int(t_mae[idx].bbox.y1)), (int(t_mae[idx].bbox.x2), int(t_mae[idx].bbox.y1)), (0, 255, 255), thickness=5, lineType=cv2.LINE_AA)
-                        cv2.line(ato_img,(int(t_ato[idx].bbox.x1), int(t_ato[idx].bbox.y1)), (int(t_ato[idx].bbox.x2), int(t_ato[idx].bbox.y1)), (0, 255, 255), thickness=5, lineType=cv2.LINE_AA)
-        
+                        cv2.line(mae_img,(t_mae[idx].bbox.x1, t_mae[idx].bbox.y1), (t_mae[idx].bbox.x2, t_mae[idx].bbox.y1), (0, 255, 255), thickness=5, lineType=cv2.LINE_AA)
+                        cv2.line(ato_img,(t_ato[idx].bbox.x1, t_ato[idx].bbox.y1), (t_ato[idx].bbox.x2, t_ato[idx].bbox.y1), (0, 255, 255), thickness=5, lineType=cv2.LINE_AA)
+            
                     #セル（表）に差分がある箇所を描画
-                    else:
+                    if info == 'table':
                         for i in range(diff.shape[0]):
                             for j in range(diff.shape[1]):
                                 if diff.iloc[i,j] == False:

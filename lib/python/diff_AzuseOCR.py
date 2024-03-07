@@ -10,6 +10,8 @@ def diff_image_Azure(image_folder_pass,png_img_name):
 
     mae_extracted_tables = img_obj.getImageTable_Azure('mae')
     ato_extracted_tables = img_obj.getImageTable_Azure('ato')
+    
+    print(len(mae_extracted_tables))
 
     mae_cleansing_tables = img_obj.cleansing(mae_extracted_tables)
     ato_cleansing_tables = img_obj.cleansing(ato_extracted_tables)
