@@ -2,7 +2,7 @@
 
 - static/image 配下の「mae」「ato」フォルダにそれぞれ比較対象の帳票を格納する。
 - main 関数の実行を行う。
-- static/output_image 配下の「mae」「ato」フォルダに現新比較対象の帳票を再格納する。
+- static/output_image 配下の「mae」「ato」フォルダに差分を描画後の帳票を格納する。
 
 ## 差分がある箇所は以下の形式で再描画している。
 
